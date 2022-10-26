@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desviar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        canvas {
+            border: 3px solid black;
+        }
+    </style>
+</head>
+<body>
+    <canvas></canvas>
+</body>
+
+
+<script>
+const canvas = document.querySelector("canvas");
+const c = canvas.getContext("2d")
+
+const lC = canvas.width = 1024
+const aC = canvas.height = 576
+
+let nuvemX = -100
+let velNuvem = 0.15
+
+let velSol = -25
+
+setInterval(() => {
+    velSol += 0.5
+    nuvemX += velNuvem
+}, 10);
+console.log(nuvemX)
+
+
+const animacao = () => {
+    requestAnimationFrame(animacao)
+    c.clearRect(0,0,lC,aC)
+    c.shadowColor = 'black'
+    c.shadowOffsetX = 30 - (velSol / 18)
+    c.shadowOffsetY = 10
+    c.shadowBlur = 15
+    c.fillStyle = 'green'
+    c.fillRect(lC/2,aC-100,25,70)
+    c.shadowColor = "rgba(0,0,0,0)"
+
+
+
+
+
+    if(velSol >= lC + 100)
+    velSol = -25
+    c.fillStyle = 'orange'
+    c.fillRect(velSol,25,30,30)
+
+
+    c.fillStyle = 'blue'
+    if(nuvemX >= lC + 100)
+    nuvemX = -100
+
+    c.fillRect(nuvemX, 60,100,25)
+
+}
+
+animacao()
+
+</script>
+
+</html>
